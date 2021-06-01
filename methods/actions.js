@@ -54,6 +54,17 @@ var functions = {
         else {
             return res.json({success: false, msg: 'No Headers'})
         }
+    },
+
+    postUserinfo: function(req,res){
+        user.find({}, function(err,documents){
+            if(err){
+                res.send('Something went wrong');
+            }
+            else{
+                res.send(documents);
+            }
+        })
     }
 }
 
