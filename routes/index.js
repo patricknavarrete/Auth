@@ -22,16 +22,6 @@ router.post('/authenticate', actions.authenticate)
 //@route GET /getinfo
 router.get('/getinfo', actions.getinfo)
 
-router.post('/getinfo', function(req,res){
-    user.find({}, function(err,documents){
-        if(err){
-            res.send('Something went wrong');
-        }
-        else{
-            res.send(documents);
-        }
-    })
-})
 
 
 module.exports = router
