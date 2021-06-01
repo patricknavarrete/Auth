@@ -57,7 +57,7 @@ var functions = {
     },
 
     postUserinfo: function(req,res){
-        user.find({}, function(err,documents){
+        User.find({}, function(err,documents){
             if(err){
                 res.send('Something went wrong');
             }
