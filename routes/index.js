@@ -24,6 +24,8 @@ router.get('/getinfo', actions.getinfo)
 
 router.post('/postUserinfo', actions.postUserinfo)
 
+router.post('/changepass', actions.changepass)
+
 
 
 module.exports = router
