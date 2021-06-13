@@ -1,6 +1,7 @@
 var User = require('../models/user')
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
+var bcrypt = require('bcrypt')
 
 var functions = {
     addNew: function (req, res) {
@@ -72,7 +73,47 @@ var functions = {
                 res.send(documents);
             }
         })
-    }
+    },
+    
+     changepass: function(req, res){
+            let {newpass, password} = req.body;
+            newpass = newpass.trim();
+            password = password.trim();
+           User.findOne({
+                email:req.body.email
+            },
+            function (err, user){
+               user.comparePassword(req.body.password, function(err, isMatch){ 
+                        if(isMatch && !err){
+    
+                            bcrypt.genSalt(10, function(err, salt){
+    
+                                bcrypt.hash(newpass, salt, function(err,hash){
+    
+                                    newpass=hash;
+    
+                                    User.findOneAndUpdate(
+                                        {email: req.body.email},
+                                        {$set: {password:newpass}},
+                                        (err, result) =>{
+                                            if(err) return res.status (500).json({ msg: "Error updating password"});
+    
+                                            return res.json({ msg: newpass});
+                                        }
+                                    )
+                                })
+                            })
+    
+                              }
+                        else{
+                            return res.status(403).send({success:false, msg: 'Wrong Password'})
+                        }
+                    })
+    
+    
+    
+            })
+        },
 
     
 }
