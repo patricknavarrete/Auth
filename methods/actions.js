@@ -114,6 +114,112 @@ var functions = {
     
             })
         },
+    
+    changeFirstname: function(req, res){
+            let {newfirstname} = req.body;
+            newfirstname = newfirstname.trim();
+    
+           User.findOne({
+                email:req.body.email
+            },
+            function (err, user){
+    
+                User.findOneAndUpdate(
+                     {email: req.body.email},
+                     {$set: {firstName:newfirstname}},
+                      (err, result) =>{
+                      if(err) return res.status (500).json({ msg: "Error updating firstname"});
+    
+                    return res.json({ msg: newfirstname});
+               })
+             })
+    
+        },
+
+        changeLastname: function(req, res){
+            let {newlastname} = req.body;
+            newlastname = newlastname.trim();
+    
+           User.findOne({
+                email:req.body.email
+            },
+            function (err, user){
+    
+                User.findOneAndUpdate(
+                     {email: req.body.email},
+                     {$set: {lastName:newlastname}},
+                      (err, result) =>{
+                      if(err) return res.status (500).json({ msg: "Error updating lastname"});
+    
+                    return res.json({ msg: newlastname});
+               })
+             })
+    
+        },
+
+        changeMiddleinitial: function(req, res){
+            let {newmiddleinitial} = req.body;
+            newmiddleinitial = newmiddleinitial.trim();
+    
+           User.findOne({
+                email:req.body.email
+            },
+            function (err, user){
+    
+                User.findOneAndUpdate(
+                     {email: req.body.email},
+                     {$set: {middleInitial:newmiddleinitial}},
+                      (err, result) =>{
+                      if(err) return res.status (500).json({ msg: "Error updating middleinitial"});
+    
+                    return res.json({ msg: newmiddleinitial});
+               })
+             })
+    
+        },
+
+        changeAddress: function(req, res){
+            let {newaddress} = req.body;
+            newaddress = newaddress.trim();
+    
+           User.findOne({
+                email:req.body.email
+            },
+            function (err, user){
+    
+                User.findOneAndUpdate(
+                     {email: req.body.email},
+                     {$set: {address:newaddress}},
+                      (err, result) =>{
+                      if(err) return res.status (500).json({ msg: "Error updating address"});
+    
+                    return res.json({ msg: newaddress});
+               })
+             })
+    
+        },
+
+        changePhonenumber: function(req, res){
+            let {newphonenumber} = req.body;
+            newphonenumber= newphonenumber.trim();
+    
+           User.findOne({
+                email:req.body.email
+            },
+            function (err, user){
+    
+                User.findOneAndUpdate(
+                     {email: req.body.email},
+                     {$set: {phoneNumber:newphonenumber}},
+                      (err, result) =>{
+                      if(err) return res.status (500).json({ msg: "Error updating Phone Number"});
+    
+                    return res.json({ msg: newphonenumber});
+               })
+             })
+    
+        },
+
 
     
 }
