@@ -26,6 +26,16 @@ router.post('/postUserinfo', actions.postUserinfo)
 
 router.post('/changepass', actions.changepass)
 
+router.post('/changeFirstname', actions.changeFirstname)
+
+router.post('/changeLastname', actions.changeLastname)
+
+router.post('/changeMiddleinitial', actions.changeMiddleinitial)
+
+router.post('/changeAddress', actions.changeAddress)
+
+router.post('/changePhonenumber', actions.changePhonenumber)
+
 
 
 module.exports = router
