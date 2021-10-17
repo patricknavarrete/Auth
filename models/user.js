@@ -28,7 +28,11 @@ var userSchema = new Schema({
     },
     password: {
         type: String,
-        require: true
+        require: true,
+    },
+    role: {
+        type: String,
+        default: 'homeowners'
     }
 })
 
