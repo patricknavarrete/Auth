@@ -7,7 +7,7 @@ var functions = {
     addNew: function (req, res) {
         if ((!req.body.email) || (!req.body.password ) || (!req.body.firstName) 
         || (!req.body.lastName) || (!req.body.middleInitial) || (!req.body.address) 
-        || (!req.body.phoneNumber)) 
+        || (!req.body.phoneNumber)) || (!req.body.role)
          {
             res.json({success: false, msg: 'Enter all fields'})
         }
@@ -19,7 +19,8 @@ var functions = {
                 middleInitial: req.body.middleInitial,
                 address: req.body.address,
                 phoneNumber: req.body.phoneNumber,
-                password: req.body.password
+                password: req.body.password,
+                role: req.body.role
             });
             newUser.save(function (err, newUser) {
                 if (err) {
