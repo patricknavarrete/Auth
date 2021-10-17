@@ -4,7 +4,7 @@ var bcrypt = require('bcrypt')
 var userSchema = new Schema({
     email: {
         type: String,
-        require: true
+        require: true,
     },
     firstName: {
         type: String,
@@ -32,6 +32,7 @@ var userSchema = new Schema({
     },
     role: {
         type: String,
+        require: true,
         default: 'homeowners'
     }
 })
