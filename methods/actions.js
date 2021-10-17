@@ -34,14 +34,14 @@ var functions = {
     },
     
     addNewSuggestion: function (req,res){
-        if ((!req.body.suggestion))
+        if ((!req.body.suggestions))
         {
             res.json ({success: false, msg: 'please enter your report'})
         } 
         else {
             var newSuggestion = Suggestion ({
                 name: req.body.name,
-                suggestion: req.body.suggestion
+                suggestions: req.body.suggestions
             });
 
             newSuggestion.save(function(err,newSuggestion){
