@@ -32,6 +32,30 @@ var functions = {
             })
         }
     },
+    
+    addNewSuggestion: function (req,res){
+        if ((!req.body.suggestion))
+        {
+            res.json ({success: false, msg: 'please enter your report'})
+        } 
+        else {
+            var newSuggestion = Suggestion ({
+                name: req.body.name,
+                suggestion: req.body.suggestion
+            });
+
+            newSuggestion.save(function(err,newSuggestion){
+                if (err){
+                    res.json({success: false, msg: 'Failed to save suggestion'})
+                }
+                else {
+                    res.json({success: true, msg: 'Successfully Reported'})
+                }
+            })
+
+        }
+    },
+    
     authenticate: function (req, res) {
         User.findOne({
             email: req.body.email
