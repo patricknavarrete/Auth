@@ -1,14 +1,21 @@
 var User = require('../models/user')
+var Suggestion = require ('../models/suggestion')
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
 var bcrypt = require('bcrypt')
 
 var functions = {
     addNew: function (req, res) {
-        if ((!req.body.email) || (!req.body.password ) || (!req.body.firstName) 
-        || (!req.body.lastName) || (!req.body.middleInitial) || (!req.body.address) 
-        || (!req.body.phoneNumber))
-         {
+        if ((!req.body.email) ||  
+        (!req.body.firstName) || 
+        (!req.body.lastName) || 
+        (!req.body.middleInitial) || 
+        (!req.body.address) || 
+        (!req.body.phoneNumber) ||
+        (!req.body.password ) || 
+        (!req.body.role)
+        
+        ) {
             res.json({success: false, msg: 'Enter all fields'})
         }
         else {
@@ -32,6 +39,7 @@ var functions = {
             })
         }
     },
+
     
     addNewSuggestion: function (req,res){
         if ((!req.body.suggestions))
@@ -39,7 +47,7 @@ var functions = {
             res.json ({success: false, msg: 'please enter your report'})
         } 
         else {
-            var newSuggestion = Suggestion ({
+            var newSuggestion = Suggestion({
                 name: req.body.name,
                 suggestions: req.body.suggestions
             });
@@ -83,7 +91,7 @@ var functions = {
         if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
             var token = req.headers.authorization.split(' ')[1]
             var decodedtoken = jwt.decode(token, config.secret)
-             return res.json({success: true, decodedtoken})
+            return res.json({success: true, decodedtoken})
         }
         else {
             return res.json({success: false, msg: 'No Headers'})
@@ -100,8 +108,41 @@ var functions = {
             }
         })
     },
-    
-     changepass: function(req, res){
+
+        deleteDataUser: function (req,res){
+            User.findOneAndDelete({
+
+                email:req.body.email
+
+            } , function(err){
+
+                if(err){
+                    res.send('Deleting Account Failed');
+                }
+                else{
+                    res.send('Document Deleted Successfully')
+                }
+            })
+        },
+
+        checkEmail: function (req,res){
+            User.findOne({email:req.params.email}, (err,result) => {
+                    if(err) return res.status(500).json({msg:err});
+                        if(result!==null)
+                        {
+                         return res.json({
+                                Status: true,
+                            });
+                        }
+                        else return res.json({
+                            Status: false,
+                        })
+
+                    });
+                },
+                       
+
+        changepass: function(req, res){
             let {newpass, password} = req.body;
             newpass = newpass.trim();
             password = password.trim();
@@ -130,8 +171,7 @@ var functions = {
                                 })
                             })
     
-                              }
-                        else{
+                              } else{
                             return res.status(403).send({success:false, msg: 'Wrong Password'})
                         }
                     })
@@ -140,8 +180,8 @@ var functions = {
     
             })
         },
-    
-    changeFirstname: function(req, res){
+
+        changeFirstname: function(req, res){
             let {newfirstname} = req.body;
             newfirstname = newfirstname.trim();
     
