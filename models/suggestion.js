@@ -6,7 +6,6 @@ var suggestionSchema = new Schema({
     name:{
         type: String,
         require: true,
-        unique: true,
     },
     suggestions: {
         type: String,
