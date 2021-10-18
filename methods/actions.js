@@ -108,6 +108,17 @@ var functions = {
             }
         })
     },
+    
+        postSuggestions: function (req,res){
+        Suggestion.find({}, function(err,documents){
+            if(err){
+                res.send('Something went wrong');
+            }
+            else {
+                res.send(documents);
+            }
+        })
+    },
 
         deleteDataUser: function (req,res){
             User.findOneAndDelete({
