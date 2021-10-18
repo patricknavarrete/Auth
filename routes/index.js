@@ -26,6 +26,8 @@ router.get('/getinfo', actions.getinfo)
 
 router.post('/postUserinfo', actions.postUserinfo)
 
+router.post('/postSuggestion', actions.postSuggestions)
+
 router.post('/changepass', actions.changepass)
 
 router.post('/changeFirstname', actions.changeFirstname)
