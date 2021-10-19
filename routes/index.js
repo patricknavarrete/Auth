@@ -30,6 +30,8 @@ router.post('/postUserinfo', actions.postUserinfo)
 
 router.post('/postSuggestion', actions.postSuggestions)
 
+router.post('/postVisitor', actions.postVisitors)
+
 router.post('/changepass', actions.changepass)
 
 router.post('/changeFirstname', actions.changeFirstname)
