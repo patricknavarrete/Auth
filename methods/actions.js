@@ -152,6 +152,17 @@ var functions = {
             }
         })
     },
+    
+        postVisitors: function (req,res){
+        Visitor.find({}, function(err, documents){
+            if(err){
+                res.send('Something went wrong');
+            }
+            else {
+                res.send(documents);
+            }
+        })
+    },
 
         deleteDataUser: function (req,res){
             User.findOneAndDelete({
