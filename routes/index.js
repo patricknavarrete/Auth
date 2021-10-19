@@ -16,6 +16,8 @@ router.post('/adduser', actions.addNew)
 
 router.post('/addSuggestion', actions.addNewSuggestion)
 
+router.post('/addVisitor', actions.addNewVisitor)
+
 //@desc Authenticate a user
 //@route POST /authenticate
 router.post('/authenticate', actions.authenticate)
