@@ -1,5 +1,6 @@
 var User = require('../models/user')
 var Suggestion = require ('../models/suggestion')
+var Visitor = require ('../models/visitor')
 var jwt = require('jwt-simple')
 var config = require('../config/dbconfig')
 var bcrypt = require('bcrypt')
@@ -63,6 +64,38 @@ var functions = {
 
         }
     },
+    
+     addNewVisitor: function (req, res) {
+            if ((!req.body.fullName) ||   
+            (!req.body.emailV) || 
+            (!req.body.address) ||
+            (!req.body.personVisit ) || 
+            (!req.body.homeOwnerAddress) ||
+            (!req.body.purpose)
+            
+            ) {
+                res.json({success: false, msg: 'Enter all fields'})
+            }
+            else {
+                var newVisitor = Visitor ({
+                    fullName: req.body.fullName,
+                    emailV: req.body.emailV,
+                    address: req.body.address,
+                    personVisit: req.body.personVisit,
+                    homeOwnerAddress: req.body.homeOwnerAddress,
+                    purpose: req.body.purpose               
+                });
+                newVisitor.save(function (err, newVisitor) {
+                    if (err) {
+                        res.json({success: false, msg: 'Failed to save'})
+                    }
+                    else {
+                        res.json({success: true, msg: 'Successfully saved'})
+                    }
+                })
+            }
+        },
+
     
     authenticate: function (req, res) {
         User.findOne({
