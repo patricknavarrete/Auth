@@ -13,8 +13,7 @@ var functions = {
         (!req.body.middleInitial) || 
         (!req.body.address) || 
         (!req.body.phoneNumber) ||
-        (!req.body.password ) || 
-        (!req.body.role)
+        (!req.body.password )
         
         ) {
             res.json({success: false, msg: 'Enter all fields'})
